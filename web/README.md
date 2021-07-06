@@ -1,10 +1,11 @@
-#Appinion Web Interface
+# Appinion Web Interface
 
 ## Getting Started
 
 Create a virtual environment
 ```bash
 python -m virtualenv env
+source env/bin/activate
 ```
 
 Install Dependencies
