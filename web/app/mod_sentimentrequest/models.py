@@ -1,4 +1,4 @@
-from app import db
+from app.database import db
 
 
 class Base(db.Model):
@@ -17,7 +17,7 @@ class SentimentRequest(Base):
     keyword = db.Column(db.String(128), nullable=False)
     by_user_email = db.Column(db.String(128), nullable=False)
 
-    def __init__(self, keyword, by_user_email, password):
+    def __init__(self, keyword, by_user_email):
 
         self.keyword = keyword
         self.by_user_email = by_user_email

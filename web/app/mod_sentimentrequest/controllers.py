@@ -6,6 +6,9 @@ from flask import (
         url_for
     )
 
+from app.database import db
+
+from app.mod_sentimentrequest.models import SentimentRequest
 from app.mod_sentimentrequest.forms import SentimentRequestForm
 
 mod_sentimentrequest = Blueprint(
@@ -17,6 +20,12 @@ def sentimentrequest():
     form = SentimentRequestForm(request.form)
 
     if form.validate_on_submit():
+        sentiment_request = SentimentRequest(
+                form.keyword.data, 'test@email.com')
+
+        db.session.add(sentiment_request)
+        db.session.commit()
+
         return redirect(url_for('home.home'))
 
     return render_template('sentimentrequest/sentimentrequest.html', form=form)
