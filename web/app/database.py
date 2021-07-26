@@ -58,8 +58,8 @@ def get_secret():
             return decoded_binary_secret
 
 
-db_secret = ''
+db_secret = 'CEBw77jkpmDzyyu'
 engine = create_engine(
-        f'postgresql://postgres:{db_secret}@appinion-test-jul-21.ctj86imnhzqm.us-east-1.rds.amazonaws.com:5432/sentiment',
+        f'postgresql://postgres:{db_secret}@database-1.ctj86imnhzqm.us-east-1.rds.amazonaws.com:5432/sentiment',
         convert_unicode=True)
 db = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
