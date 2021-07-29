@@ -1,3 +1,4 @@
+import requests
 from flask import (
         Blueprint,
         request,
@@ -22,6 +23,10 @@ def sentimentrequest():
     if form.validate_on_submit():
         sentiment_request = SentimentRequest(
                 form.keyword.data, 'test@email.com')
+
+        # Trigger the sentiment analysis
+        result = requests.get(f'https://gg9qu1nns2.execute-api.us-east-1.amazonaws.com/default/tweet_capture?keyword={form.keyword.data}', headers={'x-api-key': 'AX8x81eUu05wZzb0qhOjx7LMMkvASE8r2S7W373F'})
+        print(result)
 
         db.add(sentiment_request)
         db.commit()
