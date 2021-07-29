@@ -63,8 +63,8 @@ def get_secret():
         # f'postgresql://postgres:{db_secret}@database-1.ctj86imnhzqm.us-east-1.rds.amazonaws.com:5432/sentiment',
         # convert_unicode=True)
 
-db_secret = 'QyTa6993JeFLtPxU'
+db_secret = ''
 engine = create_engine(
-        f'postgresql://postgres:{db_secret}@database-1.ctj86imnhzqm.us-east-1.rds.amazonaws.com:5432/sentiment',
+        f'postgresql://postgres@localhost/sentiment',
         convert_unicode=True)
 db = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))

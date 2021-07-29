@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect
 from app.mod_home.controllers import mod_home as home_module
+from app.mod_auth.controllers import mod_auth as auth_module
 from app.mod_sentimentrequest.controllers import (
         mod_sentimentrequest as sentimentrequest_module
     )
@@ -9,6 +10,7 @@ app = Flask(__name__)
 
 # Configurations
 app.config.from_object('config')
+
 
 @app.route("/")
 def home():
@@ -21,6 +23,7 @@ def not_found(error):
 
 
 app.register_blueprint(home_module)
+app.register_blueprint(auth_module)
 app.register_blueprint(sentimentrequest_module)
 
 if __name__ == '__main__':
