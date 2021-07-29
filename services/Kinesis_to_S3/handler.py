@@ -1,7 +1,8 @@
 import boto3
-from tweepy import OAuthHandler, API, Cursor
+from tweepy import OAuthHandler, API
 import json
 import time
+from textblob import TextBlob
 
 
 def lambda_handler(event, context):
@@ -21,7 +22,7 @@ def lambda_handler(event, context):
     auth.set_access_token(access_Token, access_Token_Secret)
 
     api = API(auth)
-    data = api.search(q=keyword, count=30)
+    data = api.search(q=keyword, count=500)
 
     try:
         print('Twitter streaming...')
@@ -33,20 +34,20 @@ def lambda_handler(event, context):
 
             tweet = status._json
 
-            print(tweet)
-
             try:
+                blob = TextBlob(tweet['text'])
                 payload = {
                     'id': str(tweet['id']),
                     'username': tweet['user']['name'],
                     'screen_name': tweet['user']['screen_name'],
                     'tweet': str(tweet['text'].encode('ascii','ignore')),
-                    'keyword': keyword
+                    'keyword': keyword,
+                    'polarity': blob.sentiment.polarity
                 }
 
                 # only put the record when message is not None
                 if (payload):
-                    # print(payload)
+                    print(payload)
                     # note that payload is a list
 
                     # Data getting deliverd to Kinesis
@@ -66,3 +67,7 @@ def lambda_handler(event, context):
 
     except Exception as e:
         print(e)
+
+
+# if __name__ == '__main__':
+    # lambda_handler({'queryStringParameters': {'keyword': 'Trump'}}, None)

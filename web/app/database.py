@@ -8,7 +8,7 @@ from botocore.exceptions import ClientError
 
 def get_secret():
 
-    secret_name = "database-test"
+    secret_name = "postgres"
     region_name = "us-east-1"
 
     # Create a Secrets Manager client
@@ -58,7 +58,12 @@ def get_secret():
             return decoded_binary_secret
 
 
-db_secret = 'CEBw77jkpmDzyyu'
+# db_secret = 'U8wsrCu6pUJJ3pDw'
+# engine = create_engine(
+        # f'postgresql://postgres:{db_secret}@database-1.ctj86imnhzqm.us-east-1.rds.amazonaws.com:5432/sentiment',
+        # convert_unicode=True)
+
+db_secret = 'QyTa6993JeFLtPxU'
 engine = create_engine(
         f'postgresql://postgres:{db_secret}@database-1.ctj86imnhzqm.us-east-1.rds.amazonaws.com:5432/sentiment',
         convert_unicode=True)

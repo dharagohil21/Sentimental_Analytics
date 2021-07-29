@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from app.mod_home.controllers import mod_home as home_module
 from app.mod_sentimentrequest.controllers import (
         mod_sentimentrequest as sentimentrequest_module
@@ -9,6 +9,10 @@ app = Flask(__name__)
 
 # Configurations
 app.config.from_object('config')
+
+@app.route("/")
+def home():
+    return redirect('/home')
 
 
 @app.errorhandler(404)
